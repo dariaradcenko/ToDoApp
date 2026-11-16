@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Parse from "parse";
+import { createPrivateList } from "../services/listServices";
 
 export default function AuthPage({ onAuthenticated }) {
   const [username, setUsername] = useState("");
@@ -14,10 +15,7 @@ export default function AuthPage({ onAuthenticated }) {
       user.set("username", username);
       user.set("password", password);
       await user.signUp();
-      const acl = new Parse.ACL(user);
-      acl.setPublicReadAccess(true);
-      user.setACL(acl);
-      await user.save();
+      await createPrivateList();
       onAuthenticated(user);
     } catch (err) {
       setError(err.message);
