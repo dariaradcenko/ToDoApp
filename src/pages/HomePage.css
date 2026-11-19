@@ -1,0 +1,136 @@
+/* Only homepage.html imports these page-wide rules. They do not affect the
+   teammate's original task app, whose index.css is unchanged. */
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: #f5f7ff; color: #27364e; font-family: "Lato", Arial, sans-serif; }
+button { font-family: inherit; }
+
+/* This frame belongs only to the homepage. AuthPage itself is reused unchanged. */
+.homepage-login { width: min(440px, calc(100% - 32px)); margin: 64px auto; padding: 28px; border: 1px solid #c8def7; border-radius: 12px; background: white; }
+.homepage-login > p { margin: 0 0 20px; font-size: 14px; line-height: 1.5; }
+
+/* Flex keeps the navy sidebar beside the current view. Sticky keeps navigation
+   available while a long task list scrolls; it does not cover the page content. */
+.workspace-shell { display: flex; align-items: flex-start; min-height: 100vh; }
+.workspace-sidebar { position: sticky; top: 0; display: flex; flex-direction: column; flex: 0 0 244px; min-height: 100vh; height: 100vh; padding: 28px 16px; background: #1b304f; color: #dce8fa; }
+.workspace-label { margin: 0 12px 14px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.workspace-sidebar nav { display: flex; flex-direction: column; gap: 8px; }
+.workspace-sidebar nav a { display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 10px 12px; border-radius: 8px; color: inherit; font-size: 13px; font-weight: 700; text-decoration: none; }
+.workspace-sidebar nav a[aria-current="page"] { background: #dceafa; color: #27364e; }
+.workspace-sidebar nav a:hover { background: #ffffff18; }
+.workspace-sidebar nav a[aria-current="page"]:hover { background: #dceafa; }
+.workspace-sidebar :focus-visible { outline: 2px solid #dceafa; outline-offset: 3px; }
+.workspace-content { flex: 1; min-width: 0; min-height: 100vh; margin-top: 4px; border-top: 1px solid #d7e2f2; }
+.workspace-placeholder { padding: 36px 28px; }
+.workspace-placeholder a { color: #285aad; }
+
+/* The saved overview is plain text. Only Edit project creates input elements. */
+.home-page { padding: 36px 28px 24px; }
+.home-header { margin-bottom: 40px; color: #080b10; }
+.home-heading-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.home-header h1 { margin: 0; font-size: 36px; line-height: 1.25; overflow-wrap: anywhere; text-decoration: none; }
+.home-heading-actions { display: flex; align-items: center; gap: 12px; }
+.edit-project-button { padding: 6px 0; border: 0; background: none; color: #285aad; font-size: 12px; cursor: pointer; }
+.edit-project-button:hover { text-decoration: underline; }
+.home-header p { margin: 26px 0 0; font-size: 13px; line-height: 18px; font-weight: 700; }
+
+/* All editable fields live in one ordinary form. Two equal columns keep it compact;
+   labels sit above their inputs, and the number/date types use browser controls. */
+.project-editor { padding: 28px 30px; background: #f7f9fd; }
+.project-editor h2 { margin: 0 0 20px; font-size: 22px; }
+.project-editor fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.project-editor-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.project-editor label { display: flex; flex-direction: column; gap: 7px; min-width: 0; font-size: 13px; }
+.project-editor input, .project-editor select { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid #b8cee9; border-radius: 6px; background: white; color: #27364e; font: inherit; }
+.project-editor .project-edit-actions { margin-top: 20px; }
+.home-page a { color: #285aad; }
+
+/* Hide helper labels visually but keep them available to screen readers. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Keep the blue overview and pale timeline inside one rounded border.
+   overflow clips their backgrounds to the rounded corners. */
+.project-card { overflow: hidden; border: 1px solid #c8def7; border-radius: 12px; box-shadow: 0 1px 2px #27364e26; }
+.project-overview { padding: 30px; background: #dbeafa; }
+.project-status { display: inline-block; padding: 4px 12px; border-radius: 20px; background: #eaf2ff; font-size: 11px; line-height: 16px; font-weight: 700; }
+.project-edit-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.project-title { margin: 12px 0 22px; font-size: 22px; line-height: 28px; overflow-wrap: anywhere; }
+.task-label { display: block; margin: 0 0 6px; font-size: 11px; }
+.current-task { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; font-size: 14px; line-height: 22px; }
+.home-page .current-task-link { color: #27364e; text-decoration: none; overflow-wrap: anywhere; }
+.home-page .current-task-link:hover { text-decoration: underline; }
+.task-completed { text-decoration: line-through !important; }
+
+/* Put the deadline and member count side by side, wrapping on smaller screens. */
+.project-details { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 24px; }
+.project-details p { display: flex; align-items: center; gap: 8px; margin: 0; color: #52627a; font-size: 11px; line-height: 16px; font-weight: 700; }
+.project-save-note, .save-message { font-size: 11px; line-height: 1.5; }
+.project-save-note { margin: 16px 0 0; color: #52627a; }
+.save-message { margin: 0; color: #52627a; }
+
+/* Buttons share a visible keyboard focus outline. Disabled means a save is in progress
+   or there is nothing to save; the pointer and lighter color explain that visually. */
+.task-button, .secondary-button { padding: 8px 14px; border-radius: 7px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+.task-button { border: 1px solid #285aad; background: #285aad; color: white; }
+.task-button:hover { background: #20498c; }
+.complete-task-button { padding: 5px 14px; font-size: 10px; line-height: 14px; }
+.secondary-button { border: 1px solid #285aad; background: white; color: #285aad; }
+.secondary-button:hover { background: #eaf2ff; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.home-page :focus-visible { outline: 3px solid #285aad; outline-offset: 3px; }
+.form-error, .workspace-error { color: #9b2323; font-size: 13px; line-height: 1.5; }
+.workspace-error { margin: 16px 20px; padding: 12px 16px; border: 1px solid #c8def7; border-radius: 8px; background: white; font-size: 13px; }
+
+/* JSX sets the blue width from the dates. The circular ::after marker is positioned
+   at the end of the blue part; it does not need another HTML element. */
+.project-timeline { padding: 20px 30px 38px; background: #f7f9fd; }
+.project-timeline > p { margin: 0 0 18px; font-size: 13px; }
+.timeline-track { height: 10px; border-radius: 10px; background: #d6dfec; }
+.timeline-elapsed { position: relative; height: 100%; border-radius: inherit; background: #285aad; }
+.timeline-elapsed::after { content: ""; position: absolute; top: 50%; right: 0; width: 15px; height: 15px; border: 2px solid white; border-radius: 50%; background: #285aad; box-shadow: 0 1px 2px #27364e40; transform: translate(50%, -50%); }
+.timeline-dates { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 16px; color: #52627a; font-size: 11px; }
+
+/* Two columns match the reference: the focus panel is slightly wider.
+   minmax(0, ...) prevents long task names from making either panel wider than the page. */
+.home-task-panels { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 12px; margin-top: 36px; }
+.summary-card { min-height: 278px; padding: 24px 22px 16px; border: 1px solid #d4e3f7; border-radius: 12px; background: white; box-shadow: 0 1px 2px #27364e26; }
+.summary-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.summary-heading h2 { margin: 0; font-size: 21px; line-height: 1.3; }
+.summary-heading p { margin: 7px 0 0; color: #52627a; font-size: 11px; }
+.summary-heading > a { flex-shrink: 0; font-size: 11px; text-decoration: none; }
+.focus-list, .upcoming-list { margin: 8px 0 0; padding: 0; list-style: none; }
+.focus-list li { display: flex; align-items: center; gap: 12px; min-height: 65px; padding: 12px 0; border-bottom: 1px solid #e5edfa; }
+.focus-list input[type="checkbox"] { flex-shrink: 0; width: 22px; height: 22px; margin: 0; accent-color: #285aad; cursor: pointer; }
+.focus-list .task-link { flex: 1; min-width: 0; color: #27364e; font-size: 14px; text-decoration: none; overflow-wrap: anywhere; }
+.focus-list .task-link:hover { text-decoration: underline; }
+.task-due { color: #617089; font-size: 11px; white-space: nowrap; }
+.summary-empty { margin: 25px 0 12px; color: #52627a; font-size: 13px; line-height: 1.6; }
+
+/* Every upcoming item is one link, including its date badge, with a large click target. */
+.upcoming-list { margin-top: 18px; }
+.upcoming-list li + li { margin-top: 14px; }
+.upcoming-list a { display: flex; align-items: center; gap: 12px; color: #27364e; font-size: 13px; font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+.upcoming-list a:hover { text-decoration: underline; }
+.date-badge { display: flex; flex: 0 0 40px; flex-direction: column; align-items: center; justify-content: center; height: 40px; border-radius: 8px; background: #eaf1fd; }
+.date-badge > span { font-size: 8px; text-transform: uppercase; }
+.date-badge strong { margin-top: 1px; font-size: 14px; }
+
+/* Stack the two cards on smaller screens and reduce padding so inputs still fit. */
+@media (max-width: 700px) {
+  .workspace-shell { flex-direction: column; }
+  .workspace-sidebar { position: static; flex-basis: auto; width: 100%; height: auto; min-height: 0; padding: 16px; }
+  .workspace-sidebar nav { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .workspace-sidebar nav a { font-size: 12px; gap: 7px; }
+  .workspace-label { margin: 0 12px 10px; }
+  .workspace-content { width: 100%; margin-top: 0; }
+  .home-task-panels { grid-template-columns: 1fr; }
+  .home-page { padding: 24px 14px 12px; }
+  .home-header h1 { font-size: 30px; }
+  .project-overview, .project-timeline { padding: 20px; }
+  .project-title { font-size: 20px; }
+  .project-editor { padding: 22px 20px; }
+  .project-editor-fields { grid-template-columns: 1fr; }
+  .summary-card { padding: 22px 20px 16px; }
+  .focus-list li { flex-wrap: wrap; }
+  .focus-list .task-link { flex-basis: calc(100% - 40px); }
+  .focus-list .task-due { margin-left: 34px; }
+}
