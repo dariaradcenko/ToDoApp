@@ -5,7 +5,7 @@ import Parse from "parse";
 const settings = import.meta.env || {};
 export const configured = Boolean(settings.VITE_PARSE_APP_ID && settings.VITE_PARSE_JS_KEY);
 if (configured) {
-  Parse.initialize(settings.APP_ID, settings.JS_KEY);
+  Parse.initialize(settings.VITE_PARSE_APP_ID, settings.VITE_PARSE_JS_KEY);
   Parse.serverURL = "https://parseapi.back4app.com";
 }
 
