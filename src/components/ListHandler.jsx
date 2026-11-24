@@ -4,7 +4,7 @@ import { createTodo } from "../services/todoServices";
 import NewTodoForm from "./NewTodoForm";
 import ToDoList from "./ToDoList";
 import SupervisorSuggestions from "./SupervisorSuggestions";
-import "../pages/Taskpage.css";
+import "../pages/TaskPage.css";
 
 export default function ListHandler({ userId }) {
   const [lists, setLists] = useState([]);
