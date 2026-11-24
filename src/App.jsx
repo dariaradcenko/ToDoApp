@@ -1,17 +1,14 @@
 import { useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Parse from "parse";
+import Parse, { configured } from "./services/parse.js";
 import AuthPage from "./pages/AuthPage.jsx";
-import ListHandler from "./components/ListHandler.jsx";
-
-Parse.serverURL = "https://parseapi.back4app.com";
-Parse.initialize(
-  import.meta.env.VITE_PARSE_APP_ID,
-  import.meta.env.VITE_PARSE_JS_KEY,
-);
+import Workspace from "./components/Workspace.jsx";
 
 function App() {
-  const [user, setUser] = useState(Parse.User.current());
+  const [user, setUser] = useState(() =>
+    configured ? Parse.User.current() : null,
+  );
 
   function handleAuthenticated(loggedInUser) {
     setUser(loggedInUser);
@@ -21,15 +18,24 @@ function App() {
     Parse.User.logOut().then(() => setUser(null));
   }
 
+  if (!configured) {
+    return (
+      <p>The project service is not configured. Please check your .env file.</p>
+    );
+  }
+
   if (!user) {
     return <AuthPage onAuthenticated={handleAuthenticated} />;
   }
 
   return (
-    <div className="main-inner">
-      <ListHandler userId={user.id} />
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/overview" replace />} />
+      <Route
+        path="/*"
+        element={<Workspace userId={user.id} onLogout={handleLogout} />}
+      />
+    </Routes>
   );
 }
 

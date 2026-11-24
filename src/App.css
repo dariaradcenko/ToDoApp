@@ -1,0 +1,15 @@
+/* Shared application defaults. Page-specific styling lives in HomePage.css
+   and TaskPage.css, so the task page no longer overrides the homepage. */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f5f7ff;
+  color: #27364e;
+  font-family: "Lato", Arial, sans-serif;
+}
+button {
+  font-family: inherit;
+}
