@@ -4,6 +4,7 @@ import { fetchHomepageTaskData } from "../services/thesisServices.js";
 import { setTodoDone } from "../services/todoServices.js";
 import HomePage from "../pages/HomePage.jsx";
 import ListHandler from "./ListHandler.jsx";
+import DiscussionPage from "../pages/DiscussionPage.jsx";
 
 // Task data and route selection stay together in this homepage-only component.
 export default function Workspace({ userId, onLogout }) {
@@ -98,16 +99,7 @@ export default function Workspace({ userId, onLogout }) {
               </main>
             }
           />
-          <Route
-            path="/discussions"
-            element={
-              <main className="workspace-placeholder">
-                <h1>Discussions</h1>
-                <p>Discussions are not available yet.</p>
-                <Link to="/overview">Back to overview</Link>
-              </main>
-            }
-          />
+          <Route path="/discussions" element={<DiscussionPage />} />
           <Route
             path="*"
             element={
