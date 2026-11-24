@@ -4,6 +4,7 @@ import { currentUser, fetchHomepageTaskData } from "../services/ThesisService.js
 import { setTodoDone } from "../services/todoServices.js";
 import AuthPage from "../pages/AuthPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
+import DiscussionPage from "../pages/DiscussionPage.jsx";
 
 // This wrapper belongs to the isolated homepage. Reuse the existing login component
 // as it is, so signing in does not depend on the task app's missing component.
@@ -81,7 +82,7 @@ function Workspace({ userId }) {
         <Routes>
           <Route path="/overview" element={<HomePage lists={data.lists} todos={data.todos} loading={data.loading} error={data.error} pendingIds={pendingIds} onToggle={handleToggle} />} />
           <Route path="/reminders" element={<main className="workspace-placeholder"><h1>Reminders</h1><p>Reminders are not available yet.</p><Link to="/overview">Back to overview</Link></main>} />
-          <Route path="/discussions" element={<main className="workspace-placeholder"><h1>Discussions</h1><p>Discussions are not available yet.</p><Link to="/overview">Back to overview</Link></main>} />
+          <Route path="/discussions" element={<DiscussionPage />} />
           <Route path="/homepage.html" element={<Navigate to="/overview" replace />} />
           <Route path="*" element={<main className="workspace-placeholder"><h1>Page not found</h1><Link to="/overview">Back to overview</Link></main>} />
         </Routes>
